@@ -1,0 +1,28 @@
+sequenceDiagram
+    participant Game
+    participant Player
+    participant Defender
+    participant SoccerBall
+    participant Trophy
+    participant Score
+
+    Game-->>Game: changeState(WinState)
+
+    Game->>Player: disableMovement()
+    Game->>Defender: stopMovement()
+
+    Game->>SoccerBall: confirmAllCollected()
+    Game->>Trophy: confirmAllCollected()
+
+    Game->>Score: getFinalScore()
+    Score-->>Game: finalScore
+
+    Game->>Player: showWinMessage(finalScore)
+    Game->>Player: promptRestartOrExit()
+
+    alt Restart chosen
+        Game-->>Game: resetGame()
+        Game-->>Game: changeState(GameStart)
+    else Exit chosen
+        Game-->>Game: endProgram()
+    end

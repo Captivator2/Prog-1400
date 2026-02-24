@@ -1,0 +1,23 @@
+sequenceDiagram
+    participant Game
+    participant Player
+    participant Defender
+    participant Score
+
+    Game-->>Game: changeState(GameOver)
+
+    Game->>Player: disableMovement()
+    Game->>Defender: stopMovement()
+
+    Game->>Score: getFinalScore()
+    Score-->>Game: finalScore
+
+    Game->>Player: showGameOverMessage(finalScore)
+    Game->>Player: promptRestartOrExit()
+
+    alt Restart chosen
+        Game-->>Game: resetGame()
+        Game-->>Game: changeState(GameStart)
+    else Exit chosen
+        Game-->>Game: endProgram()
+    end

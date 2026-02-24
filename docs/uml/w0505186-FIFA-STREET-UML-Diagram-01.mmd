@@ -1,0 +1,96 @@
+---
+config:
+  layout: elk
+---
+classDiagram
+
+class Game {
+    - field : Field
+    - player : Player
+    - defenders : List
+    - score : Score
+    + startGame()
+    + updateGame()
+    + endGame()
+}
+
+class Field {
+    - width : int
+    - height : int
+    + isInsideBoundary()
+}
+
+class Player {
+    - position : Position
+    - speed : int
+    + move()
+    + collectItem()
+}
+
+class Defender {
+    - position : Position
+    - speed : int
+    + move()
+}
+
+class SoccerBall {
+    - position : Position
+    - points : int
+    + collect()
+}
+
+class Trophy {
+    - position : Position
+    - bonusPoints : int
+    + collect()
+}
+
+class Score {
+    - currentPoints : int
+    + increase()
+    + reset()
+}
+
+class Position {
+    - x : int
+    - y : int
+}
+
+class SoccerBall {
+  - position
+  - points
+  + collect()
+}
+
+class Trophy {
+  - position
+  - bonusPoints
+  + collect()
+}
+
+Game *-- "0..*" SoccerBall
+Game *-- "0..*" Trophy
+Game *-- Field
+Game *-- Player
+Game *-- Score
+Game *-- "0..*" Defender
+Player --> Position
+Defender --> Position
+SoccerBall --> Position
+Trophy --> Position
+
+Game --> Player
+Game --> Defender
+Game --> Field
+Game --> Score
+Game --> SoccerBall
+Game --> Trophy
+
+Player --> Score
+Player --> SoccerBall
+Player --> Trophy
+
+Field --> Player
+Field --> Defender
+Field --> SoccerBall
+Field --> Trophy

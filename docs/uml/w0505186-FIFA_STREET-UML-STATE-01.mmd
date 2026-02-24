@@ -1,0 +1,9 @@
+stateDiagram-v2
+    [*] --> GameStart
+    GameStart --> Playing
+
+    Playing --> GameOver
+    Playing --> WinState
+
+    GameOver --> GameStart
+    WinState --> GameStart

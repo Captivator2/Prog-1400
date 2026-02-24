@@ -1,0 +1,21 @@
+
+sequenceDiagram
+    participant Game
+    participant Field
+    participant Player
+    participant Defender
+    participant SoccerBall
+    participant Trophy
+    participant Score
+
+    Game->>Field: loadField()
+    Game->>Score: resetScore()
+    Score-->>Game: score = 0
+
+    Game->>Player: placeAtStart(Field)
+    Game->>Defender: placeDefenders(Field)
+
+    Game->>SoccerBall: spawnBalls(Field)
+    Game->>Trophy: spawnTrophies(Field)
+
+    Game-->>Game: state = "Playing State"

@@ -1,0 +1,25 @@
+sequenceDiagram
+    participant Game
+    participant Player
+    participant Defender
+    participant SoccerBall
+    participant Trophy
+    participant Field
+    participant Score
+
+    Game->>Player: receiveInput()
+    Player->>Field: requestMove()
+    Field-->>Player: moveAllowed
+
+    Player->>SoccerBall: checkCollision()
+    SoccerBall-->>Score: addPoints()
+
+    Player->>Trophy: checkCollision()
+    Trophy-->>Score: addBonus()
+
+    Defender->>Player: checkCollision()
+    alt Player touched Defender
+        Game-->>Game: changeState(GameOver)
+    end
+
+    Game-->>Game: continuePlaying()
